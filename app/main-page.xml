@@ -1,0 +1,32 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded">
+  <TabView>
+    <TabView.items>
+      <TabViewItem title="About">
+        <TabViewItem.view>
+          <ScrollView>
+            <StackLayout cssClass="tab-content">
+              <Image margin="10" src="~/res/telerik-logo.png" />
+              <Label text="Calendar plugin demo" cssClass="title"/>
+              <Label text="The Calendar plugin.. TODO" textWrap="true"/>
+            </StackLayout>
+          </ScrollView>
+        </TabViewItem.view>
+      </TabViewItem>
+      <TabViewItem title="Demo">
+        <TabViewItem.view>
+          <GridLayout columns="*,*" rows="auto, auto, auto, auto" horizontalAlignment="center" cssClass="tab-content">
+            <Label row="0" colSpan="2" text="You need permission before being able to access the Calendar." cssClass="subtitle" textWrap="true" />
+
+            <Button row="1" col="0" text="has permission?" tap="{{ doCheckHasPermission }}" />
+            <Button row="1" col="1" text="request perm." tap="{{ doRequestPermission }}" />
+              
+            <Label row="2" colSpan="2" text="Placeholder for some useful comment" cssClass="subtitle" textWrap="true" />
+
+            <Button row="3" col="0" text="create event" tap="{{ doCreate }}" />
+            <Button row="3" col="1" text="find events" tap="{{ doFindEvents }}"/>
+          </GridLayout>
+        </TabViewItem.view>
+      </TabViewItem>
+    </TabView.items>
+  </TabView>
+</Page>
