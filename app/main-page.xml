@@ -14,7 +14,7 @@
       </TabViewItem>
       <TabViewItem title="Demo">
         <TabViewItem.view>
-          <GridLayout columns="*,*" rows="auto, auto, auto, auto" horizontalAlignment="center" cssClass="tab-content">
+          <GridLayout columns="*,*" rows="auto, auto, auto, auto, auto" horizontalAlignment="center" cssClass="tab-content">
             <Label row="0" colSpan="2" text="You need permission before being able to access the Calendar." cssClass="subtitle" textWrap="true" />
 
             <Button row="1" col="0" text="has permission?" tap="{{ doCheckHasPermission }}" />
@@ -24,6 +24,8 @@
 
             <Button row="3" col="0" text="create event" tap="{{ doCreateEvent }}" />
             <Button row="3" col="1" text="find events" tap="{{ doFindEvents }}"/>
+
+            <Button row="4" col="0" text="delete events" tap="{{ doDeleteEvents }}"/>
           </GridLayout>
         </TabViewItem.view>
       </TabViewItem>
