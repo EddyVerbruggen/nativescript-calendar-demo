@@ -22,7 +22,7 @@
               
             <Label row="2" colSpan="2" text="Placeholder for some useful comment" cssClass="subtitle" textWrap="true" />
 
-            <Button row="3" col="0" text="create event" tap="{{ doCreate }}" />
+            <Button row="3" col="0" text="create event" tap="{{ doCreateEvent }}" />
             <Button row="3" col="1" text="find events" tap="{{ doFindEvents }}"/>
           </GridLayout>
         </TabViewItem.view>

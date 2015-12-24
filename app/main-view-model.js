@@ -28,9 +28,12 @@ var DemoAppModel = (function (_super) {
   };
 
   DemoAppModel.prototype.doCreateEvent = function () {
-    Calendar.createEvent([{
-      at: new Date(new Date().getTime() + (10*1000))
-    }]).then(
+    Calendar.createEvent({
+        // spans an hour
+        title: 'Nice event',
+        startDate: new Date(new Date().getTime() + (60*60*1000)),
+        endDate: new Date(new Date().getTime() + (2*60*60*1000))
+    }).then(
         function(createdId) {
           console.log("Calendar event created with id: " + createdId);
         },
@@ -41,8 +44,10 @@ var DemoAppModel = (function (_super) {
   };
 
   DemoAppModel.prototype.doFindEvents = function () {
-    Calendar.findEvents([{
-    }]).then(
+    Calendar.findEvents({
+      startDate: new Date(new Date().getTime() - (7*24*60*60*1000)),
+      endDate: new Date(new Date().getTime() + (3*60*60*1000))
+    }).then(
         function(events) {
           dialogs.alert({
             title: "Found these events",
