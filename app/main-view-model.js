@@ -31,17 +31,26 @@ var DemoAppModel = (function (_super) {
     Calendar.createEvent({
         // spans an hour
         title: 'Christmas dinner',
-        location: 'At home',
+        location: 'At home, cal Eddy',
         notes: 'Don\'t forget to shoot the rabbit',
         url: 'http://rabbits.telerik.com',
         calendar: {
+            // id: 2,
             // if it doesn't exist we create it
-            name: "{N} Calendar",
-            color: "#FF0000" // not used right now
+            name: "{N} Cal 5",
+            // color: "#FF0000" // not used right now
         },
-        // TODO reminders
-        startDate: new Date(new Date().getTime() + (24*60*60*1000)),
-        endDate: new Date(new Date().getTime() + (27*60*60*1000))
+        reminders: {
+            first: 30,
+            second: 10
+        },
+        recurrence: {
+            frequency: Calendar.RecurrenceFrequency.DAILY,
+            interval: 2, // every other day
+            endDate: new Date(new Date().getTime() + (10*24*60*60*1000))
+        },
+        startDate: new Date(new Date().getTime() + (1*60*60*1000)),
+        endDate: new Date(new Date().getTime() + (2*60*60*1000))
     }).then(
         function(createdId) {
           dialogs.alert({
@@ -64,8 +73,8 @@ var DemoAppModel = (function (_super) {
     }).then(
         function(events) {
           dialogs.alert({
-            title: events.length > 1 ? "Showing event 1 of " + events.length : "findEvents result",
-            message: JSON.stringify(events.length > 1 ? events[0] : events),
+            title: events.length > 1 ? "Showing last event of " + events.length + " in total" : "findEvents result",
+            message: JSON.stringify(events.length > 1 ? events[events.length - 1] : events),
             okButtonText: "OK, thanks"
           })
         },
@@ -75,9 +84,24 @@ var DemoAppModel = (function (_super) {
     )
   };
 
+  DemoAppModel.prototype.doListCalendars = function () {
+    Calendar.listCalendars().then(
+        function(calendars) {
+          dialogs.alert({
+            title: "Found " + calendars.length + " calendars",
+            message: JSON.stringify(calendars),
+            okButtonText: "OK, sweet"
+          })
+        },
+        function(error) {
+          console.log("doListCalendars error: " + error);
+        }
+    )
+  };
+
   DemoAppModel.prototype.doDeleteEvents = function () {
     Calendar.deleteEvents({
-        title: 'ice',
+        title: 'dinner',
         startDate: new Date(new Date().getTime() - (8*24*60*60*1000)),
         endDate: new Date(new Date().getTime() + (3*60*60*1000))
     }).then(

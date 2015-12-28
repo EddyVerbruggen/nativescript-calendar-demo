@@ -25,7 +25,8 @@
             <Button row="3" col="0" text="create event" tap="{{ doCreateEvent }}" />
             <Button row="3" col="1" text="find events" tap="{{ doFindEvents }}"/>
 
-            <Button row="4" col="0" text="delete events" tap="{{ doDeleteEvents }}"/>
+            <Button row="4" col="0" text="list calendars" tap="{{ doListCalendars }}"/>
+            <Button row="4" col="1" text="delete events" tap="{{ doDeleteEvents }}" cssClass="button-danger"/>
           </GridLayout>
         </TabViewItem.view>
       </TabViewItem>
