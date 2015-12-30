@@ -9,7 +9,7 @@
 		}
 	},
 	"dependencies": {
-		"nativescript-calendar": "file:../nativescript-calendar",
+		"nativescript-calendar": "1.0.0",
 		"tns-core-modules": "1.5.1"
 	}
 }
