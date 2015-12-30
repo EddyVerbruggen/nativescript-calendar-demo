@@ -27,31 +27,8 @@ var DemoAppModel = (function (_super) {
     )
   };
 
-  DemoAppModel.prototype.doCreateEvent = function () {
-    Calendar.createEvent({
-        // spans an hour
-        title: 'Christmas dinner',
-        location: 'At home, cal Eddy',
-        notes: 'Don\'t forget to shoot the rabbit',
-        url: 'http://rabbits.telerik.com',
-        calendar: {
-            // id: 2,
-            // if it doesn't exist we create it
-            name: "{N} Cal 5",
-            // color: "#FF0000" // not used right now
-        },
-        reminders: {
-            first: 30,
-            second: 10
-        },
-        recurrence: {
-            frequency: Calendar.RecurrenceFrequency.DAILY,
-            interval: 2, // every other day
-            endDate: new Date(new Date().getTime() + (10*24*60*60*1000))
-        },
-        startDate: new Date(new Date().getTime() + (1*60*60*1000)),
-        endDate: new Date(new Date().getTime() + (2*60*60*1000))
-    }).then(
+  DemoAppModel.prototype._createEvent = function (options) {
+    Calendar.createEvent(options).then(
         function(createdId) {
           dialogs.alert({
             title: "Event created with ID",
@@ -65,11 +42,98 @@ var DemoAppModel = (function (_super) {
     )
   };
 
-  DemoAppModel.prototype.doFindEvents = function () {
+  DemoAppModel.prototype.doCreateEventWithReminders = function () {
+      this._createEvent({
+        // spans an hour
+        title: 'Get groceries',
+        location: 'The shop',
+        notes: 'This event has reminders',
+        url: 'http://my.shoppinglist.com',
+        reminders: {
+            first: 30,
+            second: 10
+        },
+        startDate: new Date(new Date().getTime() + (1*60*60*1000)),
+        endDate: new Date(new Date().getTime() + (2*60*60*1000))
+    });
+  };
+
+  DemoAppModel.prototype.doCreateAllDayEvent = function () {
+      var d = new Date();
+      d.setHours(0);
+      d.setMinutes(0);
+      d.setSeconds(0);
+
+      this._createEvent({
+        title: 'Go back to the shop - forgot milk',
+        location: 'The shop',
+        notes: 'This event spans all day',
+        url: 'http://my.shoppinglist.com',
+        // this will make this event an 'all day event' for tomorrow
+        startDate: new Date(d.getTime() + (24*60*60*1000)),
+        endDate: new Date(d.getTime() + (2*24*60*60*1000))
+    });
+  };
+
+  DemoAppModel.prototype.doCreateRepeatingEvent = function () {
+      this._createEvent({
+        title: 'Get groceries every other day',
+        location: 'The shop',
+        notes: 'This is a repeating event',
+        url: 'http://my.shoppinglist.com',
+        // repeat every other day for 10 days
+        recurrence: {
+            frequency: Calendar.RecurrenceFrequency.DAILY,
+            interval: 2,
+            endDate: new Date(new Date().getTime() + (10*24*60*60*1000)) // 10 days
+        },
+        startDate: new Date(new Date().getTime() + (1*60*60*1000)),
+        endDate: new Date(new Date().getTime() + (2*60*60*1000))
+    });
+  };
+
+  DemoAppModel.prototype.doCreateEventInCustomCalendar = function () {
+      this._createEvent({
+        title: 'Get groceries',
+        location: 'The shop',
+        notes: 'This event is in a custom calendar',
+        url: 'http://my.shoppinglist.com',
+        calendar: {
+            // if it doesn't exist we create it
+            name: "NativeScript Cal"
+        },
+        // spans 2 hours, starting in 3 hours
+        startDate: new Date(new Date().getTime() + (3*60*60*1000)),
+        endDate: new Date(new Date().getTime() + (5*60*60*1000))
+    });
+  };
+
+  DemoAppModel.prototype.doFindEventByTitle = function () {
     Calendar.findEvents({
-      title: 'Christ',
+      // any event containing this string will be returned
+      title: 'groceries',
+      // dates are mandatory, the event must be within this interval
       startDate: new Date(new Date().getTime() - (7*24*60*60*1000)),
       endDate: new Date(new Date().getTime() + (3*24*60*60*1000))
+    }).then(
+        function(events) {
+          dialogs.alert({
+            title: events.length + " events match the title 'groceries'",
+            message: JSON.stringify(events),
+            okButtonText: "OK, thanks"
+          })
+        },
+        function(error) {
+          console.log("doFindEventByTitle error: " + error);
+        }
+    )
+  };
+
+  DemoAppModel.prototype.doFindAllEvents = function () {
+    Calendar.findEvents({
+      // dates are mandatory, the event must be within this interval
+      startDate: new Date(new Date().getTime() - (50*24*60*60*1000)),
+      endDate: new Date(new Date().getTime() + (50*24*60*60*1000))
     }).then(
         function(events) {
           dialogs.alert({
@@ -79,7 +143,7 @@ var DemoAppModel = (function (_super) {
           })
         },
         function(error) {
-          console.log("doFindEvents error: " + error);
+          console.log("doFindAllEvents error: " + error);
         }
     )
   };
@@ -101,14 +165,15 @@ var DemoAppModel = (function (_super) {
 
   DemoAppModel.prototype.doDeleteEvents = function () {
     Calendar.deleteEvents({
-        title: 'dinner',
-        startDate: new Date(new Date().getTime() - (8*24*60*60*1000)),
-        endDate: new Date(new Date().getTime() + (3*60*60*1000))
+        // id: 'EF33E6DE-D36E-473B-A50B-FEFAEF700031',
+        title: 'groceries',
+        startDate: new Date(new Date().getTime() - (7*24*60*60*1000)),
+        endDate: new Date(new Date().getTime() + (3*24*60*60*1000))
     }).then(
         function(deletedEventIds) {
           dialogs.alert({
-            title: "Deleted events ID\'s",
-            message: JSON.stringify(deletedEventIds),
+            title: "Deleted " + deletedEventIds.length + " 'groceries' event(s)",
+            message: "ID's of deleted event(s)\n\n" + JSON.stringify(deletedEventIds),
             okButtonText: "Awesome"
           })
         },
