@@ -36,6 +36,6 @@ If you run this on an Android emulator, make sure to add a Calendar in the devic
 otherwise no events can be added.
 
 
-## Screenshots (iOS)
+## Screenshot (iOS)
 
 ![](screenshots/ios-demo.png)
