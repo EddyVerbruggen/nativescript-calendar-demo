@@ -31,7 +31,7 @@ $ tns run android --emulator
 ```
 
 
-## Android Emulator Tip
+## Android Emulator tip
 If you run this on an Android emulator, make sure to add a Calendar in the device's Calendar app first,
 otherwise no events can be added.
 
