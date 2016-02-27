@@ -14,9 +14,9 @@ var DemoAppModel = (function (_super) {
             title: "Permission granted?",
             message: granted ? "YES" : "NO",
             okButtonText: "OK"
-          })
+          });
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doRequestPermission = function () {
@@ -24,7 +24,7 @@ var DemoAppModel = (function (_super) {
         function() {
           console.log("Permission requested");
         }
-    )
+    );
   };
 
   DemoAppModel.prototype._createEvent = function (options) {
@@ -34,12 +34,12 @@ var DemoAppModel = (function (_super) {
             title: "Event created with ID",
             message: JSON.stringify(createdId),
             okButtonText: "OK, nice!"
-          })
+          });
         },
         function(error) {
           console.log("doCreateEvent error: " + error);
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doCreateEventWithReminders = function () {
@@ -121,12 +121,12 @@ var DemoAppModel = (function (_super) {
             title: events.length + " events match the title 'groceries'",
             message: JSON.stringify(events),
             okButtonText: "OK, thanks"
-          })
+          });
         },
         function(error) {
           console.log("doFindEventByTitle error: " + error);
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doFindAllEvents = function () {
@@ -140,12 +140,12 @@ var DemoAppModel = (function (_super) {
             title: events.length > 1 ? "Showing last event of " + events.length + " in total" : "findEvents result",
             message: JSON.stringify(events.length > 1 ? events[events.length - 1] : events),
             okButtonText: "OK, thanks"
-          })
+          });
         },
         function(error) {
           console.log("doFindAllEvents error: " + error);
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doListCalendars = function () {
@@ -155,12 +155,12 @@ var DemoAppModel = (function (_super) {
             title: "Found " + calendars.length + " calendars",
             message: JSON.stringify(calendars),
             okButtonText: "OK, sweet"
-          })
+          });
         },
         function(error) {
           console.log("doListCalendars error: " + error);
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doDeleteEvents = function () {
@@ -175,12 +175,12 @@ var DemoAppModel = (function (_super) {
             title: "Deleted " + deletedEventIds.length + " 'groceries' event(s)",
             message: "ID's of deleted event(s)\n\n" + JSON.stringify(deletedEventIds),
             okButtonText: "Awesome"
-          })
+          });
         },
         function(error) {
           console.log("doFindEvents error: " + error);
         }
-    )
+    );
   };
 
   return DemoAppModel;
