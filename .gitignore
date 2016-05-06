@@ -1,3 +1,7 @@
-.idea
-platforms
-node_modules
+*/bin
+*/obj
+*.user-settings.xml
+Calendar/node_modules
+Calendar/platforms
+Calendar/lib
+Calendar/bin
