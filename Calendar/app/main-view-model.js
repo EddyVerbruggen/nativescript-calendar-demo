@@ -143,7 +143,11 @@ var DemoAppModel = (function (_super) {
           });
         },
         function(error) {
-          console.log("doFindAllEvents error: " + error);
+          dialogs.alert({
+            title: "Error in findEvents",
+            message: JSON.stringify(error),
+            okButtonText: "OK, thanks"
+          });
         }
     );
   };
