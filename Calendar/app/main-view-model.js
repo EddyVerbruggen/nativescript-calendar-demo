@@ -69,6 +69,7 @@ var DemoAppModel = (function (_super) {
         location: 'The shop',
         notes: 'This event spans all day',
         url: 'http://my.shoppinglist.com',
+        reminders: null,
         // this will make this event an 'all day event' for tomorrow
         startDate: new Date(d.getTime() + (24*60*60*1000)),
         endDate: new Date(d.getTime() + (2*24*60*60*1000))
