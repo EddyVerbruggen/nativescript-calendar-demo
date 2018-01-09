@@ -1,6 +1,6 @@
-var observable = require("data/observable");
+var observable = require("tns-core-modules/data/observable");
 var Calendar = require("nativescript-calendar");
-var dialogs = require("ui/dialogs");
+var dialogs = require("tns-core-modules/ui/dialogs");
 var DemoAppModel = (function (_super) {
   __extends(DemoAppModel, _super);
   function DemoAppModel() {
